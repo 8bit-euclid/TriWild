@@ -2,8 +2,20 @@
 # General Information
 ################################################################################
 
-cmake_minimum_required(VERSION 3.3)
-project(TriWild)
+# Detect if we're being built by scikit-build-core
+if(DEFINED SKBUILD_PROJECT_NAME)
+    # We're being built by scikit-build-core
+    cmake_minimum_required(VERSION 3.15)
+    project(${SKBUILD_PROJECT_NAME} VERSION ${SKBUILD_PROJECT_VERSION} LANGUAGES CXX)
+
+    # Force Python bindings on and set as top-level project
+    set(TRIWILD_WITH_PYTHON ON CACHE BOOL "Build Python bindings" FORCE)
+    set(TRIWILD_TOPLEVEL_PROJECT ON)
+else()
+    # Normal CMake build
+    cmake_minimum_required(VERSION 3.3)
+    project(TriWild)
+endif()
 
 ################################################################################
 set(THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/extern/)
@@ -136,7 +148,6 @@ add_library(triwild_lib  ${SOURCE_FILES})
 # Geogram library
 include(geogram)
 
-
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	target_compile_definitions(triwild_lib PUBLIC -D_ENABLE_EXTENDED_ALIGNED_STORAGE)
 endif()
@@ -159,4 +170,9 @@ if(TRIWILD_TOPLEVEL_PROJECT)
 	#add_executable(TriWild main.cpp UIPanel.hpp UIPanel.cpp)
 	add_executable(TriWild src/main.cpp)
 	target_link_libraries(TriWild triwild_lib)
+endif()
+
+option(TRIWILD_WITH_PYTHON "Build Python bindings" ON)
+if(TRIWILD_WITH_PYTHON)
+    add_subdirectory(bindings/python)
 endif()

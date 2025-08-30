@@ -1,0 +1,60 @@
+[build-system]
+requires = ["scikit-build-core>=0.11", "pybind11>=3.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pytriwild"
+version = "0.1.0"
+description = "Python bindings for TriWild - Robust Triangulation with Curve Constraints"
+readme = "README.md"
+license = {text = "MPL-2.0"}
+authors = [
+    {name = "Yixin Hu", email = "yixin.hu@nyu.edu"},
+    {name = "Teseo Schneider"},
+    {name = "Xifeng Gao"},
+    {name = "Qingnan Zhou"},
+    {name = "Alec Jacobson"},
+    {name = "Denis Zorin"},
+    {name = "Daniele Panozzo"},
+]
+requires-python = ">=3.9"
+dependencies = ["numpy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    "Programming Language :: C++",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+keywords = ["triangulation", "mesh", "geometry", "computational-geometry"]
+
+[project.urls]
+Homepage = "https://github.com/wildmeshing/TriWild"
+Repository = "https://github.com/wildmeshing/TriWild"
+Documentation = "https://github.com/wildmeshing/TriWild"
+"Bug Tracker" = "https://github.com/wildmeshing/TriWild/issues"
+
+[tool.scikit-build]
+# Minimum version for forward compatibility
+minimum-version = "0.11"
+
+# CMake configuration
+cmake.version = ">=3.15"
+cmake.build-type = "Release"
+ninja.version = ">=1.5"
+
+# Build configuration
+build.verbose = false
+
+# Wheel configuration - disable automatic discovery, use CMake install
+wheel.packages = []
+
+# CMake defines
+[tool.scikit-build.cmake.define]
+TRIWILD_WITH_PYTHON = "ON"

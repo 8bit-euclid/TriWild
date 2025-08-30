@@ -1,10 +1,14 @@
 *build*
 xcode*
 .idea
+.cache
+*.so
+*.egg-info
 *.code-workspace
 
 bin*
 bin_rel*
+!bindings
 
 *.DS_Store*
 
