@@ -3,6 +3,8 @@
 #
 #  LIBIGL_FOUND - system has LIBIGL
 #  LIBIGL_INCLUDE_DIR - **the** LIBIGL include directory
+cmake_minimum_required(VERSION 3.10)
+
 if(LIBIGL_FOUND)
     return()
 endif()

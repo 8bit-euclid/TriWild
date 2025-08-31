@@ -1,5 +1,5 @@
 import numpy as np
-import pytriwild
+import pytriwild as triw
 
 # Example: Simple square with constraints
 vertices_in = np.array([
@@ -17,7 +17,7 @@ edges_in = np.array([
 ])
 
 # Run triangulation
-vertices_out, faces_out, nodes, face_nodes = pytriwild.triangulate(
+vertices_out, faces_out, nodes, face_nodes = triw.triangulate(
     vertices_in=vertices_in,
     edges_in=edges_in,
     feature_info={},

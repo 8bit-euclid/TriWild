@@ -1,5 +1,5 @@
 [build-system]
-requires = ["scikit-build-core>=0.11", "pybind11>=3.0"]
+requires = ["scikit-build-core>=0.11.6", "pybind11>=3.0.1"]
 build-backend = "scikit_build_core.build"
 
 [project]
@@ -41,9 +41,6 @@ Documentation = "https://github.com/wildmeshing/TriWild"
 "Bug Tracker" = "https://github.com/wildmeshing/TriWild/issues"
 
 [tool.scikit-build]
-# Minimum version for forward compatibility
-minimum-version = "0.11"
-
 # CMake configuration
 cmake.version = ">=3.15"
 cmake.build-type = "Release"
@@ -55,6 +52,4 @@ build.verbose = false
 # Wheel configuration - disable automatic discovery, use CMake install
 wheel.packages = []
 
-# CMake defines
-[tool.scikit-build.cmake.define]
-TRIWILD_WITH_PYTHON = "ON"
+

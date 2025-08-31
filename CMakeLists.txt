@@ -1,21 +1,8 @@
 ################################################################################
 # General Information
 ################################################################################
-
-# Detect if we're being built by scikit-build-core
-if(DEFINED SKBUILD_PROJECT_NAME)
-    # We're being built by scikit-build-core
-    cmake_minimum_required(VERSION 3.15)
-    project(${SKBUILD_PROJECT_NAME} VERSION ${SKBUILD_PROJECT_VERSION} LANGUAGES CXX)
-
-    # Force Python bindings on and set as top-level project
-    set(TRIWILD_WITH_PYTHON ON CACHE BOOL "Build Python bindings" FORCE)
-    set(TRIWILD_TOPLEVEL_PROJECT ON)
-else()
-    # Normal CMake build
-    cmake_minimum_required(VERSION 3.3)
-    project(TriWild)
-endif()
+cmake_minimum_required(VERSION 3.15)
+project(TriWild)
 
 ################################################################################
 set(THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/extern/)
@@ -172,7 +159,5 @@ if(TRIWILD_TOPLEVEL_PROJECT)
 	target_link_libraries(TriWild triwild_lib)
 endif()
 
-option(TRIWILD_WITH_PYTHON "Build Python bindings" ON)
-if(TRIWILD_WITH_PYTHON)
-    add_subdirectory(bindings/python)
-endif()
+# Bquild Python bindings
+add_subdirectory(bindings/python)
