@@ -1,0 +1,15 @@
+[submodule "extern/aabbcc"]
+	path = extern/aabbcc
+	url = https://github.com/Yixin-Hu/aabbcc
+[submodule "extern/geogram"]
+	path = extern/geogram
+	url = https://github.com/Yixin-Hu/geogram
+[submodule "extern/libigl"]
+	path = extern/libigl
+	url = https://github.com/libigl/libigl
+[submodule "extern/nlopt"]
+	path = extern/nlopt
+	url = https://github.com/stevengj/nlopt
+[submodule "extern/json"]
+	path = extern/json
+	url = https://github.com/jdumas/json
