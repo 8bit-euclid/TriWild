@@ -11,6 +11,3 @@ bin_rel*
 !bindings
 
 *.DS_Store*
-
-
-extern
