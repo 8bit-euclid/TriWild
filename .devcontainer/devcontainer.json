@@ -11,7 +11,8 @@
 				"ms-python.python",
 				"twxs.cmake",
 				"ms-vscode.cmake-tools",
-				"Augment.vscode-augment"
+				"Augment.vscode-augment",
+				"tamasfe.even-better-toml"
 			]
 		}
 	}
