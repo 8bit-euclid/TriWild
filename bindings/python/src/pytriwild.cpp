@@ -2,16 +2,20 @@
 #include <pybind11/eigen.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
+#include <nlohmann/json.hpp>
 
 #include "do_triwild.h"
 
 namespace py = pybind11;
 
 // Helper function to convert pybind11::dict to nlohmann::json
-nlohmann::json dict_to_json(py::dict d)
+nlohmann::json dict_to_json(const py::dict &d)
 {
-    py::str json_str = py::module::import("json").attr("dumps")(d);
-    return nlohmann::json::parse(json_str.cast<std::string>());
+    auto json_module = py::module::import("json");
+    py::str json_str = json_module.attr("dumps")(d);
+    std::string s = json_str.cast<std::string>();
+    std::cout << "DEBUG JSON: " << s << std::endl;
+    return nlohmann::json::parse(s);
 }
 
 PYBIND11_MODULE(pytriwild, m)
