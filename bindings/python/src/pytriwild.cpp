@@ -3,20 +3,11 @@
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
 #include <nlohmann/json.hpp>
+#include <pybind11_json/pybind11_json.hpp>
 
 #include "do_triwild.h"
 
 namespace py = pybind11;
-
-// Helper function to convert pybind11::dict to nlohmann::json
-nlohmann::json dict_to_json(const py::dict &d)
-{
-    auto json_module = py::module::import("json");
-    py::str json_str = json_module.attr("dumps")(d);
-    std::string s = json_str.cast<std::string>();
-    std::cout << "DEBUG JSON: " << s << std::endl;
-    return nlohmann::json::parse(s);
-}
 
 PYBIND11_MODULE(pytriwild, m)
 {
@@ -24,8 +15,8 @@ PYBIND11_MODULE(pytriwild, m)
 
     m.def("triangulate", [](const Eigen::MatrixXd &vertices_in, const Eigen::MatrixXi &edges_in, py::dict feature_info_dict, double stop_quality = 10.0, int max_iterations = 80, int stage = 1, double epsilon = 1e-3, double feature_epsilon = 1e-3, double target_edge_length = -1.0, double edge_length_ratio = 0.02, double flat_feature_angle = 10.0, bool cut_outside = false, const Eigen::MatrixXd &hole_points = Eigen::MatrixXd(), bool mute_log = false)
           {
-        // Convert Python dict to nlohmann::json using helper function
-        nlohmann::json feature_info = dict_to_json(feature_info_dict);
+        // Conversion from py::dict to nlohmann::json is implicitly handled by pybind11_json
+        nlohmann::json feature_info = feature_info_dict;
         
         // Output variables
         Eigen::MatrixXd vertices_out;

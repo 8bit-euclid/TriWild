@@ -7,8 +7,8 @@ pybind11_add_module(pytriwild
     src/pytriwild.cpp
 )
 
-# Link against the main TriWild library
-target_link_libraries(pytriwild PRIVATE triwild_lib)
+# Link against the main TriWild library and pybind11_json
+target_link_libraries(pytriwild PRIVATE triwild_lib pybind11_json)
 
 # Set properties
 target_compile_definitions(pytriwild PRIVATE VERSION_INFO="${PROJECT_VERSION}")

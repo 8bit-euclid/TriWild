@@ -65,3 +65,11 @@ function(triwild_download_json)
         GIT_TAG        0901d33bf6e7dfe6f70fd9d142c8f5c6695c6c5b
     )
 endfunction()
+
+## pybind11_json
+function(triwild_download_pybind11_json)
+    triwild_download_project(pybind11_json
+        GIT_REPOSITORY https://github.com/pybind/pybind11_json
+        GIT_TAG        0.2.15
+    )
+endfunction()

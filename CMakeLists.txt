@@ -44,6 +44,7 @@ triwild_download_aabbcc()
 triwild_download_geogram()
 triwild_download_igl()
 triwild_download_nlopt()
+triwild_download_pybind11_json()
 
 ################################################################################
 # 3rd party libraries
@@ -149,6 +150,13 @@ if(NOT TARGET json)
 	add_library(json INTERFACE)
 	target_include_directories(json SYSTEM INTERFACE ${THIRD_PARTY_DIR}/json/include)
 endif()
+
+if(NOT TARGET pybind11_json)
+	add_library(pybind11_json INTERFACE)
+	target_include_directories(pybind11_json SYSTEM INTERFACE ${THIRD_PARTY_DIR}/pybind11_json/include)
+	target_link_libraries(pybind11_json INTERFACE json)
+endif()
+
 target_link_libraries(triwild_lib PUBLIC geogram igl::core ${GMP_LIBRARIES} nlopt json)
 
 
