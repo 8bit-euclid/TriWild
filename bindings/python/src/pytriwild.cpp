@@ -7,16 +7,21 @@
 
 namespace py = pybind11;
 
+// Helper function to convert pybind11::dict to nlohmann::json
+nlohmann::json dict_to_json(py::dict d)
+{
+    py::str json_str = py::module::import("json").attr("dumps")(d);
+    return nlohmann::json::parse(json_str.cast<std::string>());
+}
+
 PYBIND11_MODULE(pytriwild, m)
 {
     m.doc() = "Python bindings for TriWild - Robust Triangulation with Curve Constraints";
 
     m.def("triangulate", [](const Eigen::MatrixXd &vertices_in, const Eigen::MatrixXi &edges_in, py::dict feature_info_dict, double stop_quality = 10.0, int max_iterations = 80, int stage = 1, double epsilon = 1e-3, double feature_epsilon = 1e-3, double target_edge_length = -1.0, double edge_length_ratio = 0.02, double flat_feature_angle = 10.0, bool cut_outside = false, const Eigen::MatrixXd &hole_points = Eigen::MatrixXd(), bool mute_log = false)
           {
-        // Convert Python dict to nlohmann::json
-        nlohmann::json feature_info = nlohmann::json::parse(
-            py::str(feature_info_dict).cast<std::string>()
-        );
+        // Convert Python dict to nlohmann::json using helper function
+        nlohmann::json feature_info = dict_to_json(feature_info_dict);
         
         // Output variables
         Eigen::MatrixXd vertices_out;
