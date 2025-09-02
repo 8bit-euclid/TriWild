@@ -4,14 +4,14 @@ Type stubs for pytriwild - Python bindings for TriWild
 This stub file provides type hints for the compiled pytriwild extension module.
 """
 
-from typing import Dict, List, Tuple, Any, Optional
+from typing import List, Tuple, Optional
 import numpy as np
 from numpy.typing import NDArray
 
 def triangulate(
     vertices_in: NDArray[np.floating],
     edges_in: NDArray[np.integer],
-    feature_info: Dict[str, Any] = {},
+    feature_info: object = None,
     stop_quality: float = 10.0,
     max_iterations: int = 80,
     stage: int = 1,
