@@ -13,10 +13,10 @@ PYBIND11_MODULE(pytriwild, m)
 {
     m.doc() = "Python bindings for TriWild - Robust Triangulation with Curve Constraints";
 
-    m.def("triangulate", [](const Eigen::MatrixXd &vertices_in, const Eigen::MatrixXi &edges_in, py::dict feature_info_dict, double stop_quality = 10.0, int max_iterations = 80, int stage = 1, double epsilon = 1e-3, double feature_epsilon = 1e-3, double target_edge_length = -1.0, double edge_length_ratio = 0.02, double flat_feature_angle = 10.0, bool cut_outside = false, const Eigen::MatrixXd &hole_points = Eigen::MatrixXd(), bool mute_log = false)
+    m.def("triangulate", [](const Eigen::MatrixXd &vertices_in, const Eigen::MatrixXi &edges_in, const py::object &feature_info, double stop_quality = 10.0, int max_iterations = 80, int stage = 1, double epsilon = 1e-3, double feature_epsilon = 1e-3, double target_edge_length = -1.0, double edge_length_ratio = 0.02, double flat_feature_angle = 10.0, bool cut_outside = false, const Eigen::MatrixXd &hole_points = Eigen::MatrixXd(), bool mute_log = false)
           {
         // Conversion from py::dict to nlohmann::json is implicitly handled by pybind11_json
-        nlohmann::json feature_info = feature_info_dict;
+        nlohmann::json feature_json = feature_info;
         
         // Output variables
         Eigen::MatrixXd vertices_out;
@@ -26,7 +26,7 @@ PYBIND11_MODULE(pytriwild, m)
         
         // Call the main TriWild function
         triwild::do_triwild(
-            vertices_in, edges_in, feature_info,
+            vertices_in, edges_in, feature_json,
             vertices_out, faces_out, nodes, face_nodes,
             stop_quality, max_iterations, stage,
             epsilon, feature_epsilon, target_edge_length,
